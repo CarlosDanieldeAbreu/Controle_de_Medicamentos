@@ -15,10 +15,10 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
 {
     public class RepositorioRequisicaoEmBancoDados
     {
-        private static DB bancoDadosEndereco;
+        private static DBendreco bancoDadosEndereco;
         public RepositorioRequisicaoEmBancoDados()
         {
-            bancoDadosEndereco = new DB();
+            bancoDadosEndereco = new DBendreco();
         }
 
         private string enderecoBanco = bancoDadosEndereco.EnderecoBanco();
@@ -85,7 +85,6 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
 
         private const string sqlSelecionarPorNumero =
             @"SELECT TBR.ID
-                     ,TBR.MEDICAMENTO_ID
                      ,TBR.QUANTIDADEMEDICAMENTO
                      ,TBR.[DATA]
                      ,TBF.ID FUNCIONARIO_NUMERO
@@ -107,7 +106,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
                  ON
                    TBM.ID = TBR.MEDICAMENTO_ID
                 WHERE 
-	                TBR.[ID] = @ID";
+	                TBR.ID = @ID";
 
         public ValidationResult Inserir(Requisicao requisicao)
         {

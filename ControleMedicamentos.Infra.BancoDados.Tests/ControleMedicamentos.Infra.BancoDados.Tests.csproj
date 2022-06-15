@@ -17,8 +17,12 @@
   <ItemGroup>
     <Folder Include="ModuloFornecedor\" />
     <Folder Include="ModuloFuncionario\" />
-    <Folder Include="ModuloPaciente\" />
     <Folder Include="ModuloRequisicao\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ControleMedicamentos.Dominio\ControleMedicamentos.Dominio.csproj" />
+    <ProjectReference Include="..\ControleMedicamentos.Infra.BancoDados\ControleMedicamentos.Infra.BancoDados.csproj" />
   </ItemGroup>
 
 </Project>

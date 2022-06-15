@@ -10,10 +10,10 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
 {
     public class RepositorioMedicamentoEmBancoDados
     {
-        private static DB bancoDadosEndereco;
+        private static DBendreco bancoDadosEndereco;
         public RepositorioMedicamentoEmBancoDados()
         {
-            bancoDadosEndereco = new DB();
+            bancoDadosEndereco = new DBendreco();
         }
 
         private string enderecoBanco = bancoDadosEndereco.EnderecoBanco();
@@ -27,7 +27,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                     [LOTE],
                     [VALIDADE],
                     [QUANTIDADEDISPONIVEL],
-                    [FORNCEDOR_ID]
+                    [FORNECEDOR_ID]
 	            )
 	            VALUES
                 (
@@ -36,7 +36,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                     @LOTE,
                     @VALIDADE,
                     @QUANTIDADEDISPONIVEL,
-                    @FORNCEDOR_ID
+                    @FORNECEDOR_ID
 
                 );SELECT SCOPE_IDENTITY();";
 
@@ -48,7 +48,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                         [LOTE] = @LOTE,
                         [VALIDADE] = @VALIDADE,
                         [QUANTIDADEDISPONIVEL] = @QUANTIDADEDISPONIVEL,
-                        [FORNCEDOR_ID] = @FORNCEDOR_ID
+                        [FORNECEDOR_ID] = @FORNECEDOR_ID
 		            WHERE
 			            [ID] = @ID";
 
@@ -70,7 +70,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                   FROM 
                 	TBMEDICAMENTO TBM INNER JOIN TBFORNECEDOR TBF 
                   ON
-                	TBM.FORNCEDOR_ID = TBF.ID";
+                	TBM.FORNECEDOR_ID = TBF.ID";
 
         private const string sqlSelecionarPorNumero =
            @"SELECT 
@@ -85,7 +85,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
                   FROM 
                 	TBMEDICAMENTO TBM INNER JOIN TBFORNECEDOR TBF 
                   ON
-                	TBM.FORNCEDOR_ID = TBF.ID
+                	TBM.FORNECEDOR_ID = TBF.ID
                 WHERE 
                     TBM.ID = @ID";
 

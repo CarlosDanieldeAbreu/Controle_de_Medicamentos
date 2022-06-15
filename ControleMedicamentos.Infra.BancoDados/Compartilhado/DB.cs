@@ -1,20 +1,28 @@
-﻿using System;
+﻿using ControleMedicamentos.Infra.BancoDados.Compartilhado;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ControleMedicamentos.Infra.BancoDados.Compartilhado
+namespace ControleMedicamentos.Infra.BancoDados
 {
-    public class DB
+    public static class Db
     {
-        public string EnderecoBanco()
+        private static DBendreco bancoDadosEndereco = new DBendreco();
+
+        private static string enderecoBanco = bancoDadosEndereco.EnderecoBanco();
+
+        public static void ExecutarSql(string sql)
         {
-           return
-             "Data Source=(LocalDB)\\MSSqlLocalDB;" +
-             "Initial Catalog=controleMedicamentosDB;" +
-             "Integrated Security=True;" +
-             "Pooling=False";
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comando = new SqlCommand(sql, conexaoComBanco);
+
+            conexaoComBanco.Open();
+            comando.ExecuteNonQuery();
+            conexaoComBanco.Close();
         }
     }
 }
