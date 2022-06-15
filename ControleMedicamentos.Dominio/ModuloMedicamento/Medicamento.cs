@@ -32,6 +32,16 @@ namespace ControleMedicamentos.Dominio.ModuloMedicamento
             Requisicoes = new List<Requisicao>();
         }
 
+        public Medicamento(string nome, string descricao, string lote, DateTime validade, int quantidadeDisponivel, Fornecedor fornecedor) : this()
+        {
+            Nome = nome;
+            Descricao = descricao;
+            Lote = lote;
+            Validade = validade;
+            QuantidadeDisponivel = quantidadeDisponivel;
+            Fornecedor = fornecedor;
+        }
+
         public void ConfigurarFornecedor(Fornecedor fornecedor)
         {
             if (fornecedor == null)

@@ -12,11 +12,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloFornecedor
 {
     public class RepositorioFornecedorEmBancoDados
     {
-        private static DBendreco bancoDadosEndereco;
-        public RepositorioFornecedorEmBancoDados()
-        {
-            bancoDadosEndereco = new DBendreco();
-        }
+        private static DBendreco bancoDadosEndereco = new DBendreco();
 
         private string enderecoBanco = bancoDadosEndereco.EnderecoBanco();
 

@@ -15,11 +15,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
 {
     public class RepositorioRequisicaoEmBancoDados
     {
-        private static DBendreco bancoDadosEndereco;
-        public RepositorioRequisicaoEmBancoDados()
-        {
-            bancoDadosEndereco = new DBendreco();
-        }
+        private static DBendreco bancoDadosEndereco = new DBendreco();
 
         private string enderecoBanco = bancoDadosEndereco.EnderecoBanco();
 

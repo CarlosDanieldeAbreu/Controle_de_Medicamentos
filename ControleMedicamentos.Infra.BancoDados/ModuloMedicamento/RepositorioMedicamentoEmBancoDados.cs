@@ -10,11 +10,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
 {
     public class RepositorioMedicamentoEmBancoDados
     {
-        private static DBendreco bancoDadosEndereco;
-        public RepositorioMedicamentoEmBancoDados()
-        {
-            bancoDadosEndereco = new DBendreco();
-        }
+        private static DBendreco bancoDadosEndereco = new DBendreco();
 
         private string enderecoBanco = bancoDadosEndereco.EnderecoBanco();
 
@@ -115,6 +111,28 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
             return resultadoValidacao;
         }
 
+        public ValidationResult Editar(Medicamento medicamento)
+        {
+            var validador = new ValidadorMedicamento();
+
+            var resultadoValidacao = validador.Validate(medicamento);
+
+            if (resultadoValidacao.IsValid == false)
+                return resultadoValidacao;
+
+            SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
+
+            SqlCommand comandoEdicao = new SqlCommand(sqlEditar, conexaoComBanco);
+
+            ConfigurarParametrosMedicamento(medicamento, comandoEdicao);
+
+            conexaoComBanco.Open();
+            comandoEdicao.ExecuteNonQuery();
+            conexaoComBanco.Close();
+
+            return resultadoValidacao;
+        }
+
         public ValidationResult Excluir(Medicamento medicamento)
         {
             SqlConnection conexaoComBanco = new SqlConnection(enderecoBanco);
@@ -191,12 +209,6 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
             comando.Parameters.AddWithValue("VALIDADE", medicamento.Validade);
             comando.Parameters.AddWithValue("QUANTIDADEDISPONIVEL", medicamento.QuantidadeDisponivel);
             comando.Parameters.AddWithValue("FORNCEDOR_ID", medicamento.Fornecedor.Numero);
-        }
-
-        private void ConfigurarParametrosFornecedor(Fornecedor fornecedor, SqlCommand comando)
-        {
-            comando.Parameters.AddWithValue("ID", fornecedor.Numero);
-            comando.Parameters.AddWithValue("NOME", fornecedor.Nome);
         }
 
         private Medicamento ConverterParaMedicamento(SqlDataReader leitorMedicamento)
