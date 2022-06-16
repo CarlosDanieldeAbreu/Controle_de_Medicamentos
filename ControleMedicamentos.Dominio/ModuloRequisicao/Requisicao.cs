@@ -13,6 +13,15 @@ namespace ControleMedicamentos.Dominio.ModuloRequisicao
 
         }
 
+        public Requisicao(Medicamento medicamento, Paciente paciente, int qtdMedicamento, DateTime data, Funcionario funcionario)
+        {
+            Medicamento = medicamento;
+            Paciente = paciente;
+            QtdMedicamento = qtdMedicamento;
+            Data = data;
+            Funcionario = funcionario;
+        }
+
         public Medicamento Medicamento { get; set; }
         public Paciente Paciente { get; set; }
         public int QtdMedicamento { get; set; }
@@ -41,6 +50,22 @@ namespace ControleMedicamentos.Dominio.ModuloRequisicao
                 return;
 
             Medicamento = medicamento;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Requisicao requisicao &&
+                   Numero == requisicao.Numero &&
+                   Medicamento == requisicao.Medicamento &&
+                   Paciente == requisicao.Paciente &&
+                   QtdMedicamento == requisicao.QtdMedicamento &&
+                   Data == requisicao.Data &&
+                   Funcionario == requisicao.Funcionario;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Numero, Medicamento, Paciente, QtdMedicamento, Data, Funcionario);
         }
     }
 }

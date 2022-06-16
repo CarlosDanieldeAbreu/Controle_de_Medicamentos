@@ -208,7 +208,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
             comando.Parameters.AddWithValue("LOTE", medicamento.Lote);
             comando.Parameters.AddWithValue("VALIDADE", medicamento.Validade);
             comando.Parameters.AddWithValue("QUANTIDADEDISPONIVEL", medicamento.QuantidadeDisponivel);
-            comando.Parameters.AddWithValue("FORNCEDOR_ID", medicamento.Fornecedor.Numero);
+            comando.Parameters.AddWithValue("FORNECEDOR_ID", medicamento.Fornecedor.Numero);
         }
 
         private Medicamento ConverterParaMedicamento(SqlDataReader leitorMedicamento)
@@ -220,7 +220,7 @@ namespace ControleMedicamento.Infra.BancoDados.ModuloMedicamento
             DateTime validade = Convert.ToDateTime(leitorMedicamento["VALIDADE"]);
             int quantidadeDisponivel = Convert.ToInt32(leitorMedicamento["QUANTIDADEDISPONIVEL"]);
 
-            int numeroFornecedor = Convert.ToInt32(leitorMedicamento["FORNCEDOR_ID"]);
+            int numeroFornecedor = Convert.ToInt32(leitorMedicamento["FORNECEDOR_ID"]);
             string nomeFornecedor = Convert.ToString(leitorMedicamento["FORNECEDOR_NOME"]);
 
             var fornecedor = new Fornecedor

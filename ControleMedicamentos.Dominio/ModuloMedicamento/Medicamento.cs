@@ -23,6 +23,10 @@ namespace ControleMedicamentos.Dominio.ModuloMedicamento
         {
 
         }
+        public Medicamento(int numero) : this()
+        {
+            Numero = numero;
+        }
         public Medicamento(string nome, string descricao, string lote, DateTime validade) : this()
         {
             Nome = nome;
@@ -48,6 +52,23 @@ namespace ControleMedicamentos.Dominio.ModuloMedicamento
                 return;
 
             Fornecedor = fornecedor;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Medicamento medicamento &&
+                   Numero == medicamento.Numero &&
+                   Nome == medicamento.Nome &&
+                   Descricao == medicamento.Descricao &&
+                   Lote == medicamento.Lote &&
+                   Validade == medicamento.Validade &&
+                   QuantidadeDisponivel == medicamento.QuantidadeDisponivel &&
+                   Fornecedor == medicamento.Fornecedor;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Numero, Nome, Descricao, Lote, Validade, QuantidadeDisponivel, Fornecedor);
         }
     }
 }

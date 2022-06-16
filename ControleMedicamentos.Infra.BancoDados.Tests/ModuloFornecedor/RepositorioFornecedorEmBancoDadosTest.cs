@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloFornecedor
 {
     [TestClass]
-    public class RepositorioFuncionarioEmBancoDadosTest
+    public class RepositorioFornecedorEmBancoDadosTest
     {
         private Fornecedor fornecedor;
         private RepositorioFornecedorEmBancoDados repositorio;
 
-        public RepositorioFuncionarioEmBancoDadosTest()
+        public RepositorioFornecedorEmBancoDadosTest()
         {
             Db.ExecutarSql("DELETE FROM TBFORNECEDOR; DBCC CHECKIDENT (TBFORNECEDOR, RESEED, 0)");
 
