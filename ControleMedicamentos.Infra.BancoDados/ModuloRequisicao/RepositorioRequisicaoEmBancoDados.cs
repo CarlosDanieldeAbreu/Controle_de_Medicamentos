@@ -71,7 +71,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
                      ,TBM.VALIDADE
                  
                  FROM 
-                    TBREQUISICAO TBR INNER JOIN TBFORNECEDOR TBF 
+                    TBREQUISICAO TBR INNER JOIN TBFUNCIONARIO TBF 
                  ON
                     TBF.ID = TBR.FUNCIONARIO_ID INNER JOIN TBPACIENTE TBP
                  ON
@@ -94,7 +94,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
                      ,TBM.VALIDADE
                  
                  FROM 
-                    TBREQUISICAO TBR INNER JOIN TBFORNECEDOR TBF 
+                    TBREQUISICAO TBR INNER JOIN TBFUNCIONARIO TBF 
                  ON
                     TBF.ID = TBR.FUNCIONARIO_ID INNER JOIN TBPACIENTE TBP
                  ON

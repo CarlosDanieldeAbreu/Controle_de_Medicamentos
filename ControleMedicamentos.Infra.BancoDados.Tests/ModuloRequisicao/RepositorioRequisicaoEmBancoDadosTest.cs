@@ -102,19 +102,19 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
             medicamento = new Medicamento(1);
             var r01 = new Requisicao(medicamento, paciente, 1, DateTime.Now, funcionario);
 
-            paciente = new Paciente(1);
-            funcionario = new Funcionario(1);
-            medicamento = new Medicamento(1);
+            paciente = new Paciente(2);
+            funcionario = new Funcionario(2);
+            medicamento = new Medicamento(2);
             var r02 = new Requisicao(medicamento, paciente, 2, DateTime.Now, funcionario);
 
-            paciente = new Paciente(1);
-            funcionario = new Funcionario(1);
-            medicamento = new Medicamento(1);
+            paciente = new Paciente(3);
+            funcionario = new Funcionario(3);
+            medicamento = new Medicamento(3);
             var r03 = new Requisicao(medicamento, paciente, 3, DateTime.Now, funcionario);
 
             paciente = new Paciente(1);
-            funcionario = new Funcionario(1);
-            medicamento = new Medicamento(1);
+            funcionario = new Funcionario(4);
+            medicamento = new Medicamento(4);
             var r04 = new Requisicao(medicamento, paciente, 4, DateTime.Now, funcionario);
 
             var repositorio = new RepositorioRequisicaoEmBancoDados();
