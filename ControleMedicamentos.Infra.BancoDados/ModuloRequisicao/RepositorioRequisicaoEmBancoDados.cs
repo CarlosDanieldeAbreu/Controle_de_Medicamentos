@@ -197,7 +197,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
 
         private void ConfigurarParametrosRequisicao(Requisicao riquisicao, SqlCommand comando)
         {
-            comando.Parameters.AddWithValue("NUMERO", riquisicao.Numero);
+            comando.Parameters.AddWithValue("ID", riquisicao.Numero);
             comando.Parameters.AddWithValue("QUANTIDADEMEDICAMENTO", riquisicao.QtdMedicamento);
             comando.Parameters.AddWithValue("DATA", riquisicao.Data);
             comando.Parameters.AddWithValue("FUNCIONARIO_ID", riquisicao.Funcionario.Numero);
@@ -207,7 +207,7 @@ namespace ControleMedicamentos.Infra.BancoDados.ModuloRequisicao
 
         private Requisicao ConverterParaRiquisicao(SqlDataReader leitorRequisicao)
         {
-            int numero = Convert.ToInt32(leitorRequisicao["NUMERO"]);
+            int numero = Convert.ToInt32(leitorRequisicao["ID"]);
             int qtdMedicamento = Convert.ToInt32(leitorRequisicao["QUANTIDADEMEDICAMENTO"]);
             DateTime data = Convert.ToDateTime(leitorRequisicao["DATA"]);
 

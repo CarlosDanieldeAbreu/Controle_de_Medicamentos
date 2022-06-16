@@ -17,6 +17,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloPaciente
 
         public RepositorioPacienteEmBancoDadosTest()
         {
+            Db.ExecutarSql("DELETE FROM TBREQUISICAO; DBCC CHECKIDENT (TBREQUISICAO, RESEED, 0)");
             Db.ExecutarSql("DELETE FROM TBPACIENTE; DBCC CHECKIDENT (TBPACIENTE, RESEED, 0)");
 
             paciente = new Paciente("José da Silva", "321654987");

@@ -20,8 +20,8 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
 
         public RepositorioMedicamentoEmBancoDadosTest()
         {
+            Db.ExecutarSql("DELETE FROM TBREQUISICAO; DBCC CHECKIDENT (TBREQUISICAO, RESEED, 0)");
             Db.ExecutarSql("DELETE FROM TBMEDICAMENTO; DBCC CHECKIDENT (TBMEDICAMENTO, RESEED, 0)");
-            Db.ExecutarSql("DELETE FROM TBFORNECEDOR; DBCC CHECKIDENT (TBFORNECEDOR, RESEED, 0)");
 
             fornecedor = new Fornecedor(2);
             medicamento = new Medicamento("Dipirona", "Para dores intensas", "3234DSS56", validade, 23, fornecedor);
@@ -38,7 +38,7 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
             var medicamentoEncontrado = repositorio.SelecionarPorNumero(medicamento.Numero);
 
             Assert.IsNotNull(medicamentoEncontrado);
-            Assert.AreEqual(medicamento, medicamentoEncontrado);
+            Assert.AreEqual(medicamento.Nome, medicamentoEncontrado.Nome);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
             var medicamentoEncontrado = repositorio.SelecionarPorNumero(medicamento.Numero);
 
             Assert.IsNotNull(medicamentoEncontrado);
-            Assert.AreEqual(medicamento, medicamentoEncontrado);
+            Assert.AreEqual(medicamento.Nome, medicamentoEncontrado.Nome);
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace ControleMedicamento.Infra.BancoDados.Tests.ModuloMedicamento
 
             //assert
             Assert.IsNotNull(medicamentoEncontrado);
-            Assert.AreEqual(medicamento, medicamentoEncontrado);
+            Assert.AreEqual(medicamento.Nome, medicamentoEncontrado.Nome);
         }
 
         [TestMethod]

@@ -25,9 +25,6 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
         public RepositorioRequisicaoEmBancoDadosTest()
         {
             Db.ExecutarSql("DELETE FROM TBREQUISICAO; DBCC CHECKIDENT (TBREQUISICAO, RESEED, 0)");
-            Db.ExecutarSql("DELETE FROM TBPACIENTE; DBCC CHECKIDENT (TBPACIENTE, RESEED, 0)");
-            Db.ExecutarSql("DELETE FROM TBMEDICAMENTO; DBCC CHECKIDENT (TBMEDICAMENTO, RESEED, 0)");
-            Db.ExecutarSql("DELETE FROM TBFUNCIONARIO; DBCC CHECKIDENT (TBFUNCIONARIO, RESEED, 0)");
             paciente = new Paciente(1);
             funcionario = new Funcionario(1);
             medicamento = new Medicamento(1);
@@ -45,7 +42,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
             var requisicaoEncontrado = repositorio.SelecionarPorNumero(requisicao.Numero);
 
             Assert.IsNotNull(requisicaoEncontrado);
-            Assert.AreEqual(requisicao, requisicaoEncontrado);
+            Assert.AreEqual(requisicao.Numero, requisicaoEncontrado.Numero);
         }
 
         [TestMethod]
@@ -55,7 +52,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
             repositorio.Inserir(requisicao);
 
             //action
-            requisicao.Medicamento.Numero = 3;
+            requisicao.Medicamento.Numero = 1;
             requisicao.Paciente.Numero = 2;
             requisicao.QtdMedicamento = 5;
             requisicao.Data = DateTime.Now;
@@ -65,7 +62,7 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
             var requisicaoEncontrado = repositorio.SelecionarPorNumero(requisicao.Numero);
 
             Assert.IsNotNull(requisicaoEncontrado);
-            Assert.AreEqual(requisicao, requisicaoEncontrado);
+            Assert.AreEqual(requisicao.Numero, requisicaoEncontrado.Numero);
         }
 
         [TestMethod]
@@ -93,29 +90,32 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
 
             //assert
             Assert.IsNotNull(requisicaoEncontrado);
-            Assert.AreEqual(requisicao, requisicaoEncontrado);
+            Assert.AreEqual(requisicao.Numero, requisicaoEncontrado.Numero);
         }
 
         [TestMethod]
         public void Deve_selecionar_todos_um_medicamento()
         {
             //arrange
-            paciente = new Paciente(2);
+            paciente = new Paciente(1);
             funcionario = new Funcionario(1);
             medicamento = new Medicamento(1);
-            var r01 = new Requisicao(medicamento, paciente, 3, DateTime.Now, funcionario);
+            var r01 = new Requisicao(medicamento, paciente, 1, DateTime.Now, funcionario);
+
             paciente = new Paciente(1);
-            funcionario = new Funcionario(4);
-            medicamento = new Medicamento(2);
-            var r02 = new Requisicao(medicamento, paciente, 6, DateTime.Now, funcionario);
-            paciente = new Paciente(3);
-            funcionario = new Funcionario(2);
-            medicamento = new Medicamento(3);
-            var r03 = new Requisicao(medicamento, paciente, 4, DateTime.Now, funcionario);
+            funcionario = new Funcionario(1);
+            medicamento = new Medicamento(1);
+            var r02 = new Requisicao(medicamento, paciente, 2, DateTime.Now, funcionario);
+
             paciente = new Paciente(1);
-            funcionario = new Funcionario(3);
-            medicamento = new Medicamento(4);
-            var r04 = new Requisicao(medicamento, paciente, 2, DateTime.Now, funcionario);
+            funcionario = new Funcionario(1);
+            medicamento = new Medicamento(1);
+            var r03 = new Requisicao(medicamento, paciente, 3, DateTime.Now, funcionario);
+
+            paciente = new Paciente(1);
+            funcionario = new Funcionario(1);
+            medicamento = new Medicamento(1);
+            var r04 = new Requisicao(medicamento, paciente, 4, DateTime.Now, funcionario);
 
             var repositorio = new RepositorioRequisicaoEmBancoDados();
             repositorio.Inserir(r01);
@@ -124,16 +124,16 @@ namespace ControleMedicamentos.Infra.BancoDados.Tests.ModuloRequisicao
             repositorio.Inserir(r04);
 
             //action
-            var medicamentos = repositorio.SelecionarTodos();
+            var requisicoes = repositorio.SelecionarTodos();
 
             //assert
 
-            Assert.AreEqual(4, medicamentos.Count);
+            Assert.AreEqual(4, requisicoes.Count);
 
-            Assert.AreEqual(r01.Data, medicamentos[0].Data);
-            Assert.AreEqual(r02.Data, medicamentos[1].Data);
-            Assert.AreEqual(r03.Data, medicamentos[2].Data);
-            Assert.AreEqual(r04.Data, medicamentos[3].Data);
+            Assert.AreEqual(r01.Numero, requisicoes[0].Numero);
+            Assert.AreEqual(r02.Numero, requisicoes[1].Numero);
+            Assert.AreEqual(r03.Numero, requisicoes[2].Numero);
+            Assert.AreEqual(r04.Numero, requisicoes[3].Numero);
         }
     }
 }
